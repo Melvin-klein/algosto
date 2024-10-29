@@ -1,0 +1,11 @@
+README.md
+setup.py
+algosto/__init__.py
+algosto/main.py
+algosto.egg-info/PKG-INFO
+algosto.egg-info/SOURCES.txt
+algosto.egg-info/dependency_links.txt
+algosto.egg-info/top_level.txt
+algosto/solvers/__init__.py
+algosto/solvers/optimization/KieferWolfowitz.py
+algosto/solvers/optimization/__init__.py
