@@ -1,1 +1,1 @@
-# Algosto : May random be with you
+# Algosto : May randomness be with you
