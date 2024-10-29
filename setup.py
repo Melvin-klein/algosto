@@ -5,7 +5,8 @@ setup(
     version="0.0.1",
     author="Melvine Nargeot",
     author_email="melvine.nargeot@gmail.com",
-    description="Algosto is a package that includes stochastic optimization algorithms.",
+    description="""Algosto is a package that
+    includes stochastic optimization algorithms.""",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/Melvin-klein/algosto",
@@ -16,7 +17,5 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
-    install_requires=[
-        
-    ],
+    install_requires=[],
 )
