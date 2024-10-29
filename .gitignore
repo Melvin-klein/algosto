@@ -3,3 +3,7 @@ __pycache__
 
 ./IDEA
 ./vscode
+
+build/
+dist/
+algosto.egg-info
