@@ -6,18 +6,16 @@ on:
     tags:
       - 'v*.*.*'  # Exemple: v1.0.0
 
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js (exemple avec Node.js, mais adapte selon ton environnement)
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
+        uses: actions/checkout@v4
 
       # Créer la release
       - name: Create GitHub Release
@@ -30,14 +28,3 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-
-      # Ajouter les fichiers à la release
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/my-asset.zip  # Remplace par le chemin de ton fichier
-          asset_name: my-asset.zip
-          asset_content_type: application/zip
