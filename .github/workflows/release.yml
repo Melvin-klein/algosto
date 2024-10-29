@@ -2,9 +2,11 @@ name: Release
 
 on:
   # Déclenche le workflow lors de la création d'un tag
+  #push:
+  #  tags:
+  #    - 'v*.*.*'  # Exemple: v1.0.0
   push:
-    tags:
-      - 'v*.*.*'  # Exemple: v1.0.0
+    branches: [ "master" ]
 
 permissions:
   packages: write
@@ -26,31 +28,31 @@ jobs:
           title: Release ${{ github.ref }}
           tag: ${{ github.ref }}
 
-  publish:
-    runs-on: ubuntu-latest
-    needs: release
+  #publish:
+  #  runs-on: ubuntu-latest
+  #  needs: release
 
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install build
-    - name: Build package
-      run: python -m build
-    - name: Publish package
-      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+  #  steps:
+  #  - uses: actions/checkout@v4
+  #  - name: Set up Python
+  #    uses: actions/setup-python@v5
+  #    with:
+  #      python-version: '3.x'
+  #  - name: Install dependencies
+  #    run: |
+  #      python -m pip install --upgrade pip
+  #      pip install build
+  #  - name: Build package
+  #    run: python -m build
+  #  - name: Publish package
+  #    uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+  #    with:
+  #      user: __token__
+  #      password: ${{ secrets.PYPI_API_TOKEN }}
 
   doc:
     runs-on: ubuntu-latest
-    needs: publish
+    needs: release
 
     steps:
       - name: Checkout repository
@@ -77,6 +79,5 @@ jobs:
         with:
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          working-directory: docs
-          publish_dir: _build/
+          publish_dir: docs/_build/
           force_orphan: true
