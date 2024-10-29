@@ -68,6 +68,7 @@ jobs:
           pip install sphinx-book-theme
 
       - name: Build documentation
+        working-directory: docs
         run: |
           make html
 
