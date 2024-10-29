@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="algosto",
-    version="0.0.1",
+    version="0.0.6",
     author="Melvine Nargeot",
     author_email="melvine.nargeot@gmail.com",
     description="""Algosto is a package that
