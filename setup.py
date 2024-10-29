@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="algosto",
-    version="0.0.8",
+    version="0.0.9",
     author="Melvine Nargeot",
     author_email="melvine.nargeot@gmail.com",
     description="Algosto implements stochastic optimization algorithms.",
