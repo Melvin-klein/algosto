@@ -1,6 +1,5 @@
 accessible-pygments==0.0.5
 alabaster==1.0.0
--e git+https://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@github.com/Melvin-klein/algosto.git@64aca105959e47630e24aa8f0884853140f85ce7#egg=algosto
 babel==2.16.0
 beautifulsoup4==4.12.3
 certifi==2024.8.30
