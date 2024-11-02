@@ -15,3 +15,7 @@ algosto.egg-info
 docs/_build
 docs/_static
 docs/_templates
+
+# Personal files
+draft.py
+RELEASE.md
