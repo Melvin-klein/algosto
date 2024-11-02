@@ -3,9 +3,8 @@ name: Release
 on:
   # Déclenche le workflow lors de la création d'un tag
   push:
-    branches: master
-    #tags:
-    #  - 'v*.*.*'
+    tags:
+      - 'v*.*.*'
 
 permissions:
   packages: write
