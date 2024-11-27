@@ -2,7 +2,8 @@ Solvers
 =======
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    stochastic_gradient_descent
+   saga
    kiefer_wolfowitz

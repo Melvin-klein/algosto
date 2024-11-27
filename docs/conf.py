@@ -7,9 +7,9 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Algosto'
-copyright = '2024, Melvine Nargeot'
+copyright = '2024 Algosto'
 author = 'Melvine Nargeot'
-release = '0.0.15'
+release = '0.0.16'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -19,7 +19,6 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.autodoc',
     'sphinx_design',
-    'sphinx.ext.autosummary',
     'numpydoc',
 ]
 
@@ -43,5 +42,3 @@ html_static_path = ['_static']
 html_logo = "_static/logo.png"
 html_favicon = "_static/favivon.png"
 html_title = "Algosto Docs"
-
-autosummary_generate = True
