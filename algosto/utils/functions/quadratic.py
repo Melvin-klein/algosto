@@ -37,7 +37,7 @@ def quadratic(noise: str = None, custom_noise_fn: Callable = None) -> Tuple[Call
     >>> ct = RdSquareConstraint(2, 10, np.zeros(2))
     >>> solver = SGDSolver(ct, objective, grad)
     
-    An example with noise
+    An example with custom noise
     
     >>> import numpy as np
     >>> from algosto.utils.functions import quadratic

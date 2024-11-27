@@ -46,8 +46,6 @@ class KieferWolfowitzSolver(AbstractSolver):
                  alpha: float = 0.3,
                  b: float = 1,
                  beta: float = 0.6) -> None:
-        super().__init__()
-        
         super().__init__(ct, objective)
         self._a = a
         self._alpha = alpha

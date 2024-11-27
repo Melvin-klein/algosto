@@ -70,7 +70,7 @@ To do that, Algosto provides object called *constraints* that you can import fro
     import numpy as np
     from algosto.constraints import RdBallConstraint
 
-    ct = RdBallConstraint(2, np.zeros(2))
+    ct = RdBallConstraint(2, np.zeros(2), 5)
 
 We define a two-dimensional ball in $\mathbb{R}^d$, centered at the origin.
 Constraints provide the solver with information about the space within which it can optimize the objective function.
@@ -117,9 +117,9 @@ The full Python code is avaible just below
 
     objective, grad = quadratic()
 
-    ct = RdBallConstraint(2, np.zeros(2))
+    ct = RdBallConstraint(2, np.zeros(2), 5)
 
-    solver = SGD(ct, objective, grad)
+    solver = SGDSolver(ct, objective, grad)
 
     solver.fit()
 

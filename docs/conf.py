@@ -9,7 +9,7 @@
 project = 'Algosto'
 copyright = '2024, Melvine Nargeot'
 author = 'Melvine Nargeot'
-release = '0.0.14'
+release = '0.0.15'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

@@ -38,4 +38,3 @@ def plot(solver: AbstractSolver, num: int = 300) -> None:
     plt.title("Graphe")
     plt.axis('equal')
 
-    plt.show()
