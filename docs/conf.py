@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Algosto'
-copyright = '2024, Melvine Nargeot'
+copyright = '2024 Algosto'
 author = 'Melvine Nargeot'
 release = '0.0.15'
 
