@@ -1,17 +1,21 @@
 from abc import ABC, abstractmethod
-from typing import Callable
 import numpy as np
 import numpy.typing as npt
 
-from algosto.constraints import AbstractConstraint
+from algosto.constraints import AbstractConstraint, RdConstraint
 
 class AbstractSolver(ABC):
-    def __init__(self, ct: AbstractConstraint, objective: Callable) -> None:
+    def __init__(self, d: int, objective: callable, cst: AbstractConstraint = None, random_state: int = None) -> None:
         super().__init__()
 
-        self._ct = ct
-        self._objective = objective
+        if cst is None:
+            cst = RdConstraint(2, self)
 
+        self._d = d
+        self._objective = objective
+        self._cst = cst
+        self._random_state = random_state
+        
         self._trajectory = list()
 
     @abstractmethod
@@ -22,7 +26,7 @@ class AbstractSolver(ABC):
         """
         Returns the trajectory registered by the solver during the ``fit`` operation.
         
-        It's a matrix of size ``(n, d)``.
+        It's a matrix of size ``(n_iter, d)``.
 
         Returns
         -------
@@ -31,25 +35,14 @@ class AbstractSolver(ABC):
         """
         return np.array(self._trajectory)
     
-            
-    def get_objective(self) -> Callable:
-        """
-        Returns the objective function registered by the solver.
-
-        Returns
-        -------
-            out : Callable
-                The objective function is registered by the solver at its instanciation.
-        """
+    def get_objective(self) -> callable:
         return self._objective
     
-    def get_constraint(self) -> AbstractConstraint:
-        """
-        Returns the constraint registered by the solver
+    def set_objective(self, new_objective: callable) -> None:
+        self._objective = new_objective
 
-        Returns
-        -------
-            out : AbstractConstraint
-                The constraint is registered by the solver at its instanciation.
-        """
-        return self._ct
+    def get_constraint(self) -> AbstractConstraint:
+        return self._cst
+    
+    def set_constraint(self, new_cst: AbstractConstraint) -> None:
+        self._cst = new_cst

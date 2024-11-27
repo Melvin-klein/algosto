@@ -21,7 +21,7 @@ Here is an example of how to use them.
 
     ct = RdBallConstraint(2, np.zeros(2), 5)
 
-    solver = KieferWolfowitzSolver(ct, objective, grad)
+    solver = SGDSolver(ct, objective, grad)
 
     solver.fit()
 

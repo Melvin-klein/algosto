@@ -11,7 +11,7 @@ is a Python package built on top of *NumPy* that provides implementations of var
 
 This documentation is composed by three sections :
 
-- :doc:`Getting started <get_started>` where you can find the installation process and a quick introduction to the Algosto workflow.
+- :doc:`Get started <get_started>` where you can find the installation process and a quick introduction to the Algosto workflow.
 - :doc:`Cookbook <cookbook/index>` where you can find detailed explanations on how Algosto works, its workflows and how to use objects that compose the package.
 - :doc:`References <references/index>` where you can find detailed explanations on each objects and how they are implemented.
 

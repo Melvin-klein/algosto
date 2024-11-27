@@ -33,7 +33,7 @@ Then you can give this objective function to one of the Algosto's solvers.
 
     # ... define constraint (ct)
 
-    solver = SGDSolver(ct, objective)
+    solver = KieferWolfowitzSolver(ct, objective)
 
 Sandbox functions
 -----------------

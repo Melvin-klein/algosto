@@ -3,6 +3,29 @@ import numpy as np
 import numpy.typing as npt
 from algosto.constraints import AbstractConstraint
 
+class RdConstraint(AbstractConstraint):
+    def __init__(self, d: int, solver) -> None:
+        super().__init__(d)
+        
+        self._s = solver
+    
+    def get_one_element(self) -> npt.NDArray[np.float64]:
+        raise NotImplementedError("The RdConstraint can't give an element."
+                                  "If you don't know the starting point,"
+                                  "you should consider an other constraint such"
+                                  "RdSquareConstraint or RdBallConstraint")
+
+    def get_grid(self, num: int) -> Tuple[npt.NDArray, npt.NDArray]:
+        trajectory = self._s.get_trajectory()
+        
+        x_lim = (np.min(trajectory[:, 0]) - 0.5, np.max(trajectory[:, 0]) + 0.5)
+
+        y_lim = (np.min(trajectory[:, 1]) - 0.5, np.max(trajectory[:, 1]) + 0.5)
+
+        X, Y = super().get_grid(x_lim, y_lim, num)
+
+        return X, Y
+
 class RdBallConstraint(AbstractConstraint):
     """
     A constraint on the ball in Rd with center ``c`` and radius ``r``.
@@ -26,8 +49,7 @@ class RdBallConstraint(AbstractConstraint):
         
         if d != c.shape[0]:
             raise ValueError("The center of the ball must be a 1-D numpy array of shape d.")
-        
-        self._d = d
+
         self._c = c
         self._r = r
     
@@ -69,14 +91,3 @@ class RdBallConstraint(AbstractConstraint):
         Y[norm > self._r] = np.nan
         
         return X, Y
-    
-    def get_dimension(self) -> int:
-        """
-        Gives the dimension of the constraint.
-
-        Returns
-        -------
-            out : int
-                The dimension of the constraint.
-        """
-        return super().get_dimension()
