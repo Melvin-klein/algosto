@@ -19,7 +19,6 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.autodoc',
     'sphinx_design',
-    'sphinx.ext.autosummary',
     'numpydoc',
 ]
 
@@ -43,5 +42,3 @@ html_static_path = ['_static']
 html_logo = "_static/logo.png"
 html_favicon = "_static/favivon.png"
 html_title = "Algosto Docs"
-
-autosummary_generate = True
