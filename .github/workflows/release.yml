@@ -67,6 +67,7 @@ jobs:
           pip install sphinx
           pip install sphinx-book-theme
           pip install -r requirements.txt
+          pip install -e .
 
       - name: Build documentation
         working-directory: docs
