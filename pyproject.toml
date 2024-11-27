@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "algosto"
-version = "0.0.14"
+version = "0.0.15"
 readme = "README.md"
 description = "Algosto implements stochastic algorithms."
 authors = [{name = "Melvine Nargeot", email = "melvine.nargeot@gmail.com"}]
