@@ -5,6 +5,9 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+import os
+import sys
+sys.path.insert(0, os.path.abspath('.'))
 
 project = 'Algosto'
 copyright = '2024 Algosto'
@@ -37,8 +40,11 @@ html_theme_options = {
     "pygments_dark_style": "gruvbox-dark",
 }
 
-html_static_path = ['_static']
+html_static_path = ['images']
 
-html_logo = "_static/logo.png"
-html_favicon = "_static/favivon.png"
+html_logo = "images/logo.png"
+html_favicon = "images/favicon.png"
 html_title = "Algosto Docs"
+
+autosummary_generate = False
+numpydoc_show_class_members = False
