@@ -15,34 +15,33 @@ Usage
 -----
 
 This section shows an example on how Algosto works by applying the
-stochastic gradient descent algorithm (SGD) to a quadratic function.
+stochastic gradient descent algorithm (SGD) to a mean of quadratic functions.
+
+We define :math:`f : \mathbb R^d \to \mathbb R` the mean of quadratic functions as
+
+.. math::
+
+    f(x) = \frac{1}{d} \sum_{k=1}^d f_k(x)
+
+with :math:`f_k(x) = x_k^2`.
 
 Workflow
 ********
 
-The basic workflow needs four elements :
+The basic workflow needs two elements :
 
-An objective function
-    This is the function we want to minimize.
-    It is a Python function that takes a numpy matrix ``(n, d)``,
-    where ``n`` is the number of points to handle and ``d`` is the dimension of points,
-    and returns a result vector of length ``n``.
-
-A constraint
-    It is an object that defines the space in which the solver will optimize the function.
-    Obviously, the objective function needs to be defined on this space.
+Your objective function
+    This is the function you want to minimize. It must take a numpy vector as parameter.
 
 A solver
-    In Algosto, solvers are always classes that need an objective function and a constraint to be instanciated.
-    Simply call the ``fit`` method to minimize the objective on the constraint.
-
-A plot
-    Algosto provides some functions to plot most used graph. You can build your own graph using *Matplotlib* or *Plotly*.
+    In Algosto, solvers are always classes that need at least an objective function to be instanciated.
+    Simply call the ``fit`` method to minimize the objective.
 
 Objective function
 ******************
 
-Based on the workflow given just before, we start by defining the quadratic objective function
+Based on the workflow given just before, we start by defining your objective function,
+let's say the mean of quadratics,
 and its gradient in order to use the SGD.
 
 .. code-block:: python
@@ -50,62 +49,38 @@ and its gradient in order to use the SGD.
 
     import numpy as np
 
-    def objective(x: np.array) -> float :
-        return np.sum(x**2, axis=1)
+    def objective(x: np.array) -> float:
+        return 1/x.shape[0] * np.sum(x**2)
 
-    def grad(x: np.array) -> float :
-        return 2*x
+    def grad(x: np.array, batch_filter: np.array) -> np.array:
+        return (2 * x) * batch_filter
 
-.. caution::
+.. important::
 
-    As said before, objective functions and gradients need to be able to process multiple points simultaneously to work with Algosto.
-    Specifically, if the function operates on points of dimension ``d``, it should accept a numpy array with shape ``(n, d)``
-    and returns a numpy array of length ``n``, where ``n`` is the number of points provided to the objective function or gradient.
+    Some solvers require you to handle part of the logic within the code of your objective function or gradient.
+    This is the case with the SGD solver,
+    which uses the batch_filter parameter to indicate which portion of the function it will use.
+    The documentation for each solver provides details on the parameters used by the solver.
+    See :doc:`SGD page <references/solvers/stochastic_gradient_descent>` to know more about the parameter ``batch_filter``.
 
 
-Algosto provides some toy objective functions, of which the quadratic function is a part, that you can import like this :
-
-.. code-block:: python
-    :caption: main.py
-
-    from algosto.utils.functions import quadratic
-
-    objective, grad = quadratic()
-
-.. note::
-
-    You can find a list of all available functions in the :doc:`references <references/utils/functions/index>` section of the documentation.
-
-Constraint
-**********
-
-Now, we need to specify the definition space. 
-To do that, Algosto provides object called *constraints* that you can import from the module ``algosto.constraints`` as follow :
+Algosto provides some sandbox objective functions, of which the mean of quadratic functions is a part. You can import them like this :
 
 .. code-block:: python
     :caption: main.py
 
-    import numpy as np
-    from algosto.constraints import RdBallConstraint
+    from algosto.functions import mean_of_quadratics
 
-    ct = RdBallConstraint(2, np.zeros(2), 5)
+    objective, grad = mean_of_quadratics()
 
-We define a two-dimensional ball in :math:`\mathbb{R}^d`, centered at the origin.
-Constraints provide the solver with information about the space within which it can optimize the objective function.
+.. seealso::
 
-.. note::
-
-    You can find a list of all available constraints in the :doc:`references <references/constraints/index>` section of the documentation.
-
-.. note::
-    
-    If your constraint is not yet implemented, you can define your own.
-    Refer to the constraint chapter in the cookbook to learn how.
+    You can find a list of all available functions in the :doc:`references <references/functions/index>` section of the documentation.
 
 Solver
 ******
 
-It's time to speak about the solver itself.
+It's time to talk about the solver itself.
 Solvers are avaible from the ``algosto.solvers`` module where you can find all the solvers implemented in Algosto.
 In this example, we are going to use the stochastic gradient descent (SGD) to minimize the objective.
 
@@ -114,9 +89,18 @@ In this example, we are going to use the stochastic gradient descent (SGD) to mi
 
     from algosto.solvers import SGDSolver
 
-    solver = SGDSolver(ct, objective)
+    solver = SGDSolver(d=2, N=2, objective, grad, random_state=42)
+
+The parameter :math:`d` is mandatory for all solvers as it defines the dimension of the optimization problem.
+It means that it gives the size of the vector :math:`x` given to the objective function and to the gradient.
+The parameter :math:`N` is specific to the SGD solver family as it defines the number of chunks that the objective function admit.
+Especially in our case, the number of chunks is equal to the dimension of :math:`x`.
+
 
 .. note::
+    To know more about the SGD algorithm and its parameters, you can read the :doc:`SGD page <references/solvers/stochastic_gradient_descent>`.
+
+.. seealso::
 
     You can find a list of all available solvers in the :doc:`references <references/solvers/index>` section of the documentation.
 
@@ -125,11 +109,20 @@ Finally, we can minimize the objective function with the help of the ``fit`` met
 .. code-block:: python
     :caption: main.py
 
-    from algosto.utils import plot
+    solver.fit(x_start=[-2, 1])
 
-    solver.fit()
+Once the optimization is complete, we can display the solver's trajectory in :math:`\mathbb R^2`
 
-    plot(solver)
+.. code-block:: python
+    :caption: main.py
+
+    from algosto.evaluate import trajectory
+
+    trajectory(solver)
+
+It gives the following result
+
+.. image:: images/trajectory.png
 
 Full workflow code
 ******************
@@ -139,18 +132,21 @@ The full Python code is avaible just below
 .. code-block:: python
     :caption: main.py
 
-    import numpy as np
-    from algosto.utils.functions import quadratic
-    from algosto.constraints import RdBallConstraint
+    from algosto.functions import mean_of_quadratics
     from algosto.solvers import SGDSolver
-    from algosto.utils import plot
+    from algosto.evaluate import trajectory
 
-    objective, grad = quadratic()
+    objective, grad = mean_of_quadratics()
 
-    ct = RdBallConstraint(2, np.zeros(2), 5)
+    solver = SGDSolver(2, 2, objective, grad, random_state=42)
 
-    solver = SGDSolver(ct, objective, grad)
+    solver.fit(x_start=[-2, 1])
 
-    solver.fit()
+    trajectory(solver)
 
-    plot(solver)
+What's next ?
+-------------
+
+We have seen how to solve an optimization problem with Algosto.
+To go further in your exploration of Algosto's functionnality,
+you should take a look at the :doc:`cookbook <cookbook/index>` for instance.

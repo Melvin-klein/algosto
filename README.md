@@ -110,10 +110,10 @@ Finally, we can minimize the objective function with the help of the `fit` metho
 The full Python code is avaible just below
 
     import numpy as np
-    from algosto.utils.functions import quadratic
+    from algosto.functions import quadratic
     from algosto.constraints import RdBallConstraint
     from algosto.solvers import SGDSolver
-    from algosto.utils import plot
+    from algosto.evaluate import trajectory
 
     objective, grad = quadratic()
 

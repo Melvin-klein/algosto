@@ -38,13 +38,13 @@ Then you can give this objective function to one of the Algosto's solvers.
 Sandbox functions
 -----------------
 
-Algosto implements some simple functions in the ``algosto.utils.functions`` module.
-The list of available functions is here : :doc:`function references <../references/utils/functions/index>`
+Algosto implements some simple functions in the ``algosto.functions`` module.
+The list of available functions is here : :doc:`function references <../references/functions/index>`
 
 The following code is an example where we import the quadratic function.
 
 .. code-block:: python
 
-    from algosto.utils.functions import quadratic
+    from algosto.functions import quadratic
 
     objective, grad = quadratic()
