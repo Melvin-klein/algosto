@@ -1,0 +1,597 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Kiefer-Wolfowitz &#8212; Algosto Docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=4bf62f09"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'references/solvers/kiefer_wolfowitz';</script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Constraints" href="../constraints/index.html" />
+    <link rel="prev" title="Stochastic Average Gradient Augmented (SAGA)" href="saga.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Algosto Docs - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Algosto Docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../get_started.html">Get started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cookbook/index.html">Cookbook</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/objectives.html">Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/constraints.html">Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/solvers.html">Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cookbook/plots.html">Plots</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">References</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Solvers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="stochastic_gradient_descent.html">Stochastic Gradient Descent (SGD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="saga.html">Stochastic Average Gradient Augmented (SAGA)</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Kiefer-Wolfowitz</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../constraints/index.html">Constraints</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../constraints/rd_constraint.html"><span class="math notranslate nohighlight">\(\mathbb R^d\)</span> constraints</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions/index.html">Functions</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../evaluation/index.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Melvin-klein/algosto" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/references/solvers/kiefer_wolfowitz.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Kiefer-Wolfowitz</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algosto.solvers.KieferWolfowitzSolver"><code class="docutils literal notranslate"><span class="pre">KieferWolfowitzSolver</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algosto.solvers.KieferWolfowitzSolver.fit"><code class="docutils literal notranslate"><span class="pre">KieferWolfowitzSolver.fit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algosto.solvers.KieferWolfowitzSolver.get_a"><code class="docutils literal notranslate"><span class="pre">KieferWolfowitzSolver.get_a()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algosto.solvers.KieferWolfowitzSolver.get_alpha"><code class="docutils literal notranslate"><span class="pre">KieferWolfowitzSolver.get_alpha()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algosto.solvers.KieferWolfowitzSolver.get_b"><code class="docutils literal notranslate"><span class="pre">KieferWolfowitzSolver.get_b()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algosto.solvers.KieferWolfowitzSolver.get_beta"><code class="docutils literal notranslate"><span class="pre">KieferWolfowitzSolver.get_beta()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="kiefer-wolfowitz">
+<h1>Kiefer-Wolfowitz<a class="headerlink" href="#kiefer-wolfowitz" title="Link to this heading">#</a></h1>
+<p>The Kiefer-Wolfowitz algorithm is a stochastic algorithm for finding an extremum of
+an unknown function <span class="math notranslate nohighlight">\(f\)</span> from <span class="math notranslate nohighlight">\(\mathbb R^d\)</span> to <span class="math notranslate nohighlight">\(\mathbb R\)</span>.</p>
+<p>The algorithm do the following assumptions</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is strictly concave,</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is differentiable,</p></li>
+</ul>
+<p>and is defined by</p>
+<div class="math notranslate nohighlight">
+\[X_{n+1} = X_n + \frac{\gamma_n}{2c_n}(Y_{n+1} - Z_{n+1})\]</div>
+<p>where the initial state <span class="math notranslate nohighlight">\(X_0 \in \mathbb R^d\)</span> is chosen arbitrarily, and <span class="math notranslate nohighlight">\((\gamma_n)\)</span>, <span class="math notranslate nohighlight">\((c_n)\)</span>
+are two deterministic, positive, and decreasing sequences converging to zero, such that</p>
+<div class="math notranslate nohighlight">
+\[\sum_{n = 1}^{+∞}\gamma_n = +∞, \qquad \sum_{n = 1}^{+∞}\gamma_n c_n &lt; +∞, \qquad \sum_{n = 1}^{+∞} \left (\frac{\gamma_n}{c_n} \right)^2 &lt; +∞.\]</div>
+<p>The implementation of this algorithm in Algosto is such that <span class="math notranslate nohighlight">\(\gamma_n = \frac{a}{n^\alpha}\)</span>
+and <span class="math notranslate nohighlight">\(c_n = \frac{b}{n^\beta}\)</span>.</p>
+<p>The sequences <span class="math notranslate nohighlight">\((Y_n)\)</span> and <span class="math notranslate nohighlight">\((Z_n)\)</span> are two random vector sequences of <span class="math notranslate nohighlight">\(\mathbb R^d\)</span> satisfying</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbb E[Y_{n+1}|F_n] = \begin{pmatrix}
+f(X_n + c_ne_1) \\
+f(X_n + c_ne_2) \\
+\vdots \\
+f(X_n + c_ne_d)
+\end{pmatrix}, \qquad \mathbb E[Z_{n+1}|F_n] = \begin{pmatrix}
+f(X_n - c_ne_1) \\
+f(X_n - c_ne_2) \\
+\vdots \\
+f(X_n - c_ne_d)
+\end{pmatrix}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\((e_1, e_2, \dots, e_d)\)</span> is the canonical basis of <span class="math notranslate nohighlight">\(\mathbb R^d\)</span>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="algosto.solvers.KieferWolfowitzSolver">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">algosto.solvers.</span></span><span class="sig-name descname"><span class="pre">KieferWolfowitzSolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AbstractConstraint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objective</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#algosto.solvers.KieferWolfowitzSolver" title="Link to this definition">#</a></dt>
+<dd><p>The Kiefer-Wolfowitz algorithm wrapped in a solver class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ct</strong><span class="classifier">AbstractConstraint</span></dt><dd><p>A constraint object that inherits from <code class="docutils literal notranslate"><span class="pre">AbstractConstraint</span></code>.</p>
+</dd>
+<dt><strong>objective</strong><span class="classifier">Callable</span></dt><dd><p>The objective function to minimize. This function must be able to handle
+a 1-D array of several points.</p>
+</dd>
+<dt><strong>a</strong><span class="classifier">float</span></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">a</span></code> value as described below.</p>
+</dd>
+<dt><strong>alpha</strong><span class="classifier">float</span></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">alpha</span></code> value as described below.</p>
+</dd>
+<dt><strong>b</strong><span class="classifier">float</span></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">b</span></code> value as described below.</p>
+</dd>
+<dt><strong>beta</strong><span class="classifier">float</span></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">beta</span></code> value as described below.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<div role="list" class="citation-list">
+<div class="citation" id="r7e8aeb7b5be3-1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Kiefer, J. and Wolfowitz, J., “Stochastic estimation of the maximum of a regression function”, <em>Annals of Mathematical Statistics</em>, 1952.</p>
+</div>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ct</span> <span class="o">=</span> <span class="n">RdSquareConstraint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="c1"># ...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">KieferWolfowitzSolver</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">objective</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="p">(</span><span class="n">solver</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="algosto.solvers.KieferWolfowitzSolver.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#algosto.solvers.KieferWolfowitzSolver.fit" title="Link to this definition">#</a></dt>
+<dd><p>Run the solver to approximate the solution to the optimization problem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x_start</strong><span class="classifier">array_like</span></dt><dd><p>The point where the algorithm will start running.</p>
+</dd>
+<dt><strong>n_iter</strong><span class="classifier">int</span></dt><dd><p>The number of iterations. The solver will run exactly this number of times.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>ValueError</dt><dd><p>It raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if the dimension of <code class="docutils literal notranslate"><span class="pre">x_start</span></code> does not 
+match the dimension of the <code class="docutils literal notranslate"><span class="pre">constraint</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="algosto.solvers.KieferWolfowitzSolver.get_a">
+<span class="sig-name descname"><span class="pre">get_a</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#algosto.solvers.KieferWolfowitzSolver.get_a" title="Link to this definition">#</a></dt>
+<dd><p>Returns the <code class="docutils literal notranslate"><span class="pre">a</span></code> value registered by the solver</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">float</span></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">a</span></code> value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="algosto.solvers.KieferWolfowitzSolver.get_alpha">
+<span class="sig-name descname"><span class="pre">get_alpha</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#algosto.solvers.KieferWolfowitzSolver.get_alpha" title="Link to this definition">#</a></dt>
+<dd><p>Returns the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> value registered by the solver</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">float</span></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">alpha</span></code> value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="algosto.solvers.KieferWolfowitzSolver.get_b">
+<span class="sig-name descname"><span class="pre">get_b</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#algosto.solvers.KieferWolfowitzSolver.get_b" title="Link to this definition">#</a></dt>
+<dd><p>Returns the <code class="docutils literal notranslate"><span class="pre">b</span></code> value registered by the solver</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">float</span></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">b</span></code> value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="algosto.solvers.KieferWolfowitzSolver.get_beta">
+<span class="sig-name descname"><span class="pre">get_beta</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#algosto.solvers.KieferWolfowitzSolver.get_beta" title="Link to this definition">#</a></dt>
+<dd><p>Returns the <code class="docutils literal notranslate"><span class="pre">beta</span></code> value registered by the solver</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">float</span></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">beta</span></code> value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="saga.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Stochastic Average Gradient Augmented (SAGA)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../constraints/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Constraints</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algosto.solvers.KieferWolfowitzSolver"><code class="docutils literal notranslate"><span class="pre">KieferWolfowitzSolver</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algosto.solvers.KieferWolfowitzSolver.fit"><code class="docutils literal notranslate"><span class="pre">KieferWolfowitzSolver.fit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algosto.solvers.KieferWolfowitzSolver.get_a"><code class="docutils literal notranslate"><span class="pre">KieferWolfowitzSolver.get_a()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algosto.solvers.KieferWolfowitzSolver.get_alpha"><code class="docutils literal notranslate"><span class="pre">KieferWolfowitzSolver.get_alpha()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algosto.solvers.KieferWolfowitzSolver.get_b"><code class="docutils literal notranslate"><span class="pre">KieferWolfowitzSolver.get_b()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algosto.solvers.KieferWolfowitzSolver.get_beta"><code class="docutils literal notranslate"><span class="pre">KieferWolfowitzSolver.get_beta()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Melvine Nargeot
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024 Algosto.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
