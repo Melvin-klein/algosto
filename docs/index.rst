@@ -15,7 +15,7 @@ This documentation is composed by three sections :
 - :doc:`Cookbook <cookbook/index>` where you can find detailed explanations on how Algosto works, its workflows and how to use objects that compose the package.
 - :doc:`References <references/index>` where you can find detailed explanations on each objects and how they are implemented.
 
-.. image:: _static/humor.jpg
+.. image:: humor.jpg
 
 Stolen from https://www.math.u-bordeaux.fr/~arichou/
 
