@@ -15,7 +15,7 @@ Here is an example of how to use them.
 
     from algosto.constraints import RdBallConstraint
     from algosto.solvers import SGDSolver
-    from algosto.utils.functions import quadratic
+    from algosto.functions import quadratic
 
     objective, grad = quadratic()
 
@@ -79,9 +79,9 @@ Once the new constraint is defined, you can use it like below :
 
 .. code-block:: python
 
-    from algosto.utils.functions import quadratic
+    from algosto.functions import quadratic
     from algosto.solvers import SGDSolver
-    from algosto.utils import plot
+    from algosto.evaluate import trajectory
 
     ct = CustomConstraint(5)
 
@@ -91,4 +91,4 @@ Once the new constraint is defined, you can use it like below :
 
     solver.fit()
 
-    plot(solver)
+    trajectory(solver)

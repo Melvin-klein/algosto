@@ -1,5 +1,5 @@
 Functions
 =========
 
-.. automodule:: algosto.utils.functions
+.. automodule:: algosto.functions
     :members: quadratic

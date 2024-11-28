@@ -30,7 +30,7 @@ def quadratic(noise: str = None, custom_noise_fn: Callable = None) -> Tuple[Call
     An example without noise
     
     >>> import numpy as np
-    >>> from algosto.utils.functions import quadratic
+    >>> from algosto.functions import quadratic
     >>> from algosto.constraints import RdSquareConstraint
     >>> from algosto.solvers import SGDSolver
     >>> objective, grad = quadratic()
@@ -40,7 +40,7 @@ def quadratic(noise: str = None, custom_noise_fn: Callable = None) -> Tuple[Call
     An example with custom noise
     
     >>> import numpy as np
-    >>> from algosto.utils.functions import quadratic
+    >>> from algosto.functions import quadratic
     >>> from algosto.constraints import RdSquareConstraint
     >>> from algosto.solvers import KieferWolfowitzSolver
     >>> def noise(x):

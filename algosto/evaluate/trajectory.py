@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 from algosto.solvers import AbstractSolver
 
-def plot(solver: AbstractSolver, num: int = 300) -> None:
+def trajectory(solver: AbstractSolver, num: int = 300, show: bool = True) -> None:
     """_summary_
 
     Parameters
@@ -13,7 +13,7 @@ def plot(solver: AbstractSolver, num: int = 300) -> None:
     """
     X, Y = solver.get_constraint().get_grid(num)
     points = np.vstack((X.flatten(), Y.flatten())).T
-    Z = solver.get_objective()(points)
+    Z = np.apply_along_axis(solver.get_objective(), axis=1, arr=points)
     Z = Z.reshape((num, num))
     
     X = np.nan_to_num(X, nan=0)
@@ -28,13 +28,17 @@ def plot(solver: AbstractSolver, num: int = 300) -> None:
     # Plot trajectory
     trajectory = solver.get_trajectory()
     plt.plot(trajectory[:,0], trajectory[:,1], 'r-', markersize=8)
-    
+
     # Plot
     x_start = solver.get_trajectory()[0]
     x_end = solver.get_trajectory()[-1]
     plt.scatter(x_start[0], x_start[1], c='gray')
     plt.scatter(x_end[0], x_end[1], c='white')
 
-    plt.title("Graphe")
+    plt.title(f"Trajectory of {solver.name}")
+    plt.xlabel("Dimension 1")
+    plt.ylabel("Dimension 2")
     plt.axis('equal')
 
+    if show:
+        plt.show()

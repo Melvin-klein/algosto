@@ -10,7 +10,7 @@ Then pick one :doc:`solver available <../references/solvers/index>` and instanci
 
 .. code-block:: python
 
-    from algosto.utils.functions import quadratic
+    from algosto.functions import quadratic
     from algosto.constraints import RdBallConstraint
     from algosto.solvers import SGDSolver
 

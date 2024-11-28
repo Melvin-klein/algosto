@@ -10,10 +10,9 @@ class RdConstraint(AbstractConstraint):
         self._s = solver
     
     def get_one_element(self) -> npt.NDArray[np.float64]:
-        raise NotImplementedError("The RdConstraint can't give an element."
-                                  "If you don't know the starting point,"
-                                  "you should consider an other constraint such"
-                                  "RdSquareConstraint or RdBallConstraint")
+        raise NotImplementedError("To fit the algorithm, "
+                                  "you must either provide a starting point "
+                                  "or specify a constraint.")
 
     def get_grid(self, num: int) -> Tuple[npt.NDArray, npt.NDArray]:
         trajectory = self._s.get_trajectory()
