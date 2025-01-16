@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 import os
 import sys
-sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('../algosto'))
 
 project = 'Algosto'
 copyright = '2024 Algosto'
@@ -47,4 +47,14 @@ html_favicon = "images/favicon.png"
 html_title = "Algosto Docs"
 
 autosummary_generate = False
+autosummary_imported_members = False
 numpydoc_show_class_members = False
+autodoc_inherit_docstrings = True
+
+autodoc_default_options = {
+    'members': True,              # Documente les membres des classes
+    'undoc-members': False,       # Ignore les membres non documentés
+    'private-members': False,     # Ignore les membres privés (_nom)
+    'inherited-members': True,    # Documente les membres hérités
+    'show-inheritance': False,     # Affiche l'héritage des classes
+}

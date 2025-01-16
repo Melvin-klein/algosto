@@ -59,7 +59,7 @@ and its gradient in order to use the SGD.
 
     Some solvers require you to handle part of the logic within the code of your objective function or gradient.
     This is the case with the SGD solver,
-    which uses the batch_filter parameter to indicate which portion of the function it will use.
+    which uses the ``batch_filter`` parameter to indicate which portion of the function it will use.
     The documentation for each solver provides details on the parameters used by the solver.
     See :doc:`SGD page <references/solvers/stochastic_gradient_descent>` to know more about the parameter ``batch_filter``.
 
@@ -89,11 +89,11 @@ In this example, we are going to use the stochastic gradient descent (SGD) to mi
 
     from algosto.solvers import SGDSolver
 
-    solver = SGDSolver(d=2, N=2, objective, grad, random_state=42)
+    solver = SGDSolver(d=2, M=2, objective, grad, random_state=42)
 
 The parameter :math:`d` is mandatory for all solvers as it defines the dimension of the optimization problem.
-It means that it gives the size of the vector :math:`x` given to the objective function and to the gradient.
-The parameter :math:`N` is specific to the SGD solver family as it defines the number of chunks that the objective function admit.
+It means that it gives the size of the vector :math:`x` given to your objective function and its gradient.
+The parameter :math:`M` is specific to the SGD solver family as it defines the number of chunks that the objective function admit.
 Especially in our case, the number of chunks is equal to the dimension of :math:`x`.
 
 
@@ -149,4 +149,4 @@ What's next ?
 
 We have seen how to solve an optimization problem with Algosto.
 To go further in your exploration of Algosto's functionnality,
-you should take a look at the :doc:`cookbook <cookbook/index>` for instance.
+you should take a look at the :doc:`cookbook <cookbook/index>`.

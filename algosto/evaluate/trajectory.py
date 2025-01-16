@@ -4,12 +4,17 @@ import matplotlib.pyplot as plt
 from algosto.solvers import AbstractSolver
 
 def trajectory(solver: AbstractSolver, num: int = 300, show: bool = True) -> None:
-    """_summary_
+    """
+    Shows the trajectory of the solver in a 2-D space.
 
     Parameters
     ----------
-        solver : AbstractSolver
-            An array, any object exposing the array interface, an object whose __array__ method returns an array, or any (nested) sequence. If object is a scalar, a 0-dimensional array containing object is returned.
+    solver : AbstractSolver
+        Solver to evaluate.
+    num : int, optional, default=300
+        Number of points where the objective is evaluated.
+    show : bool, optional, default=True
+        If ``True`` it shows the graph with ``plt.show()``.
     """
     X, Y = solver.get_constraint().get_grid(num)
     points = np.vstack((X.flatten(), Y.flatten())).T
@@ -35,7 +40,7 @@ def trajectory(solver: AbstractSolver, num: int = 300, show: bool = True) -> Non
     plt.scatter(x_start[0], x_start[1], c='gray')
     plt.scatter(x_end[0], x_end[1], c='white')
 
-    plt.title(f"Trajectory of {solver.name}")
+    plt.title(f"Trajectory of {solver.get_name()}")
     plt.xlabel("Dimension 1")
     plt.ylabel("Dimension 2")
     plt.axis('equal')

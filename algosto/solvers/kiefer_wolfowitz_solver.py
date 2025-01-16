@@ -1,6 +1,5 @@
 from typing import Callable
 import numpy as np
-import numpy.typing as npt
 
 from algosto.solvers import AbstractSolver
 from algosto.constraints import AbstractConstraint
@@ -39,20 +38,27 @@ class KieferWolfowitzSolver(AbstractSolver):
     >>> plot(solver)
     """
 
+    _a = None
+    _alpha = None
+    _b = None
+    _beta = None
+
     def __init__(self,
-                 ct: AbstractConstraint,
+                 d: int,
                  objective: Callable,
+                 cst: AbstractConstraint,
+                 random_state: int,
                  a: float = 1,
                  alpha: float = 0.3,
                  b: float = 1,
                  beta: float = 0.6) -> None:
-        super().__init__(ct, objective)
+        super().__init__(d, objective, cst, random_state)
         self._a = a
         self._alpha = alpha
         self._b = b
         self._beta = beta
 
-    def fit(self, x_start: npt.NDArray[np.float64] = None, n_iter: int = 1000) -> None:
+    def fit(self, x_start: np.array = None, n_iter: int = 1000) -> None:
         """
         Run the solver to approximate the solution to the optimization problem.
 
@@ -103,6 +109,17 @@ class KieferWolfowitzSolver(AbstractSolver):
         """
         return self._a
     
+    def set_a(self, new_a: float) -> None:
+        """
+        Updates the value of ``a``.
+
+        Parameters
+        ----------
+        new_a : float
+            New value of ``a``.
+        """
+        self._a = new_a
+    
     def get_alpha(self) -> float:
         """
         Returns the ``alpha`` value registered by the solver
@@ -113,7 +130,18 @@ class KieferWolfowitzSolver(AbstractSolver):
                 The ``alpha`` value.
         """
         return self._alpha
-    
+
+    def set_alpha(self, new_alpha: float):
+        """
+        Updates the value of ``alpha``.
+
+        Parameters
+        ----------
+        new_alpha : float
+            New ``alpha`` value.
+        """
+        self._alpha = new_alpha
+
     def get_b(self) -> float:
         """
         Returns the ``b`` value registered by the solver

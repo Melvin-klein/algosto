@@ -1,5 +1,8 @@
 Functions
 =========
 
-.. automodule:: algosto.functions
-    :members: quadratic
+.. toctree::
+    :maxdepth: 1
+
+    quadratic
+    mean_of_quadratics

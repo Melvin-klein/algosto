@@ -8,46 +8,41 @@ def quadratic(noise: str = None, custom_noise_fn: Callable = None) -> Tuple[Call
     
     Parameters
     ----------
-    noise : str
+    noise : {'uniform', 'gaussian'}, default=None
         The type of noise that you want to add to the quadratic function. Values can be ``uniform`` which is a uniforme law on ``[-1, 1]``
         and ``gaussian`` which is a gaussian law of mean ``0`` and standard deviation ``1``.
         You can also add your own noise function by using the ``custom_noise_fn`` parameter.
     
-    custom_noise_fn : function
+    custom_noise_fn : callable, default=None
         Define your own noise function that will be added to the quadratic function.
-        Its parameter is the vector ``x`` of size ``d`` and it must return a vector of size ``n``.
+        Its parameter is the vector ``x`` of size ``d`` and it must return a vector of noise of size ``d``.
 
     Returns
     -------
         objective : function
-            The quadratic function.
+            The quadratic function. It takes a vector ``x`` of size ``d`` as parameter.
 
         grad : function
-            The gradient of the quadratic function.
+            The gradient of the quadratic function. It takes a vector ``x`` of size ``d`` as parameter.
 
     Examples
     --------
     An example without noise
     
-    >>> import numpy as np
     >>> from algosto.functions import quadratic
-    >>> from algosto.constraints import RdSquareConstraint
-    >>> from algosto.solvers import SGDSolver
-    >>> objective, grad = quadratic()
-    >>> ct = RdSquareConstraint(2, 10, np.zeros(2))
-    >>> solver = SGDSolver(ct, objective, grad)
-    
+    >>> from algosto.solvers import KieferWolfowitzSolver
+    >>> objective, _ = quadratic()
+    >>> solver = KieferWolfowitzSolver(2, objective)
+
     An example with custom noise
-    
+
     >>> import numpy as np
     >>> from algosto.functions import quadratic
-    >>> from algosto.constraints import RdSquareConstraint
     >>> from algosto.solvers import KieferWolfowitzSolver
     >>> def noise(x):
     ...     return np.random.normal(0, 5, x.shape[0])
-    >>> objective, grad = quadratic(custom_noise_fn = noise)
-    >>> ct = RdSquareConstraint(2, 10, np.zeros(2))
-    >>> solver = KieferWolfowitzSolver(ct, objective)
+    >>> objective, _ = quadratic(custom_noise_fn=noise)
+    >>> solver = KieferWolfowitzSolver(2, objective)
     """
     if noise == 'uniform':
         noise_fn = lambda x: np.random.uniform(-1, 1, x.shape[0])

@@ -1,9 +1,7 @@
-Utils
-=====
-
-.. automodule:: algosto.evaluate
-    :members: trajectory
+Evaluation
+==========
 
 .. toctree::
-    :maxdepth: 2
+   :maxdepth: 1
 
+   trajectory
