@@ -3,6 +3,7 @@ import numpy as np
 from algosto.constraints import AbstractConstraint
 from algosto.solvers import AbstractSolver, SGDSolver
 
+
 class SAGASolver(SGDSolver):
     """
     Solver using the Stochastic Average Gradient Augmented (SAGA) algorithm.
@@ -70,7 +71,6 @@ class SAGASolver(SGDSolver):
             
             grad = self.get_gradient()(x, batch_filter=batch_filter)
             
-            #x = x - self.get_gamma() * (grad - self.get_alpha() * (self.get_grad_memory()[u] - (1/self.get_M()) * np.sum(self.get_grad_memory(), axis=0)))
             x = x - self.get_gamma() * (grad - self.get_alpha() * (self.get_grad_memory()[u] - (1/self.get_M()) * np.sum(self.get_grad_memory(), axis=0)))
             
             self.get_grad_memory()[k,] = grad
