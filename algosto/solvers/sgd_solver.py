@@ -1,6 +1,4 @@
-from typing import Callable
 import numpy as np
-import numpy.typing as npt
 
 from algosto.solvers import AbstractSolver
 from algosto.constraints import AbstractConstraint
@@ -34,7 +32,7 @@ class SGDSolver(AbstractSolver):
     >>> from algosto.solvers import SGDSolver
     >>> objective, grad = mean_of_quadratics()
     >>> solver = SGDSolver(d=2, M=2, objective, grad)
-    >>> solver.fit(x_start=[-2, 1])
+    >>> solver.fit(x_start=np.array([-2, 1]))
     """
     
     _M = None
